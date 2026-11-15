@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"C:\\Users\\user\\Documents\\GitHub\\FactoryTwin\\FactoryTwin\\Source\\FactoryTwin\\FactoryTwin.Build.cs",
+		"C:\\Users\\user\\Documents\\GitHub\\FactoryTwin\\FactoryTwin\\Source\\FactoryTwin.Target.cs",
+		"C:\\Users\\user\\Documents\\GitHub\\FactoryTwin\\FactoryTwin\\Source\\FactoryTwinEditor.Target.cs"
+	],
+	"EngineVersion": "5.6.1"
+}

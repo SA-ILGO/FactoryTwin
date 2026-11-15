@@ -1,0 +1,14 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\user\\documents\\github\\factorytwin\\factorytwin\\source\\factorytwin\\factorytwin.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\user\\documents\\github\\factorytwin\\factorytwin\\intermediate\\build\\win64\\x64\\factorytwineditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\user\\documents\\github\\factorytwin\\factorytwin\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\factorytwin\\definitions.factorytwin.h",
+            "c:\\users\\user\\documents\\github\\factorytwin\\factorytwin\\source\\factorytwin\\factorytwin.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

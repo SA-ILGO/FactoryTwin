@@ -1,0 +1,19 @@
+{
+	"version": 1,
+	"changelists": [
+		{
+			"guid": "00000000000000000000000000000000",
+			"description": "Default Uncontrolled Changelist",
+			"files": [
+				"C:/Users/user/Documents/GitHub/FactoryTwin/FactoryTwin/Content/Factory/Maps/L_Test.umap",
+				"C:/Users/user/Documents/GitHub/FactoryTwin/FactoryTwin/Content/Actors/MyStationActor.uasset",
+				"C:/Users/user/Documents/GitHub/FactoryTwin/FactoryTwin/Content/Materials/M_StatusLamp.uasset",
+				"C:/Users/user/Documents/GitHub/FactoryTwin/FactoryTwin/Content/Actors/BP_Station.uasset",
+				"C:/Users/user/Documents/GitHub/FactoryTwin/FactoryTwin/Content/UI/WBP_StatiionPanel.uasset",
+				"C:/Users/user/Documents/GitHub/FactoryTwin/FactoryTwin/Content/UI/BP_DTController.uasset",
+				"C:/Users/user/Documents/GitHub/FactoryTwin/FactoryTwin/Content/UI/BP_DTGameMode.uasset",
+				"C:/Users/user/Documents/GitHub/FactoryTwin/FactoryTwin/Content/Factory/Maps/L_Test_Station.umap"
+			]
+		}
+	]
+}

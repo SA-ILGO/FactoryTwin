@@ -1,0 +1,16 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-FactoryTwin.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:/Users/user/Documents/GitHub/FactoryTwin/FactoryTwin/Intermediate/Build/Win64/x64/FactoryTwinEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.h.obj"
+"C:/Users/user/Documents/GitHub/FactoryTwin/FactoryTwin/Intermediate/Build/Win64/x64/UnrealEditor/Development/FactoryTwin/FactoryTwin.init.gen.cpp.obj"
+"C:/Users/user/Documents/GitHub/FactoryTwin/FactoryTwin/Intermediate/Build/Win64/x64/UnrealEditor/Development/FactoryTwin/StationActor.gen.cpp.obj"
+"C:/Users/user/Documents/GitHub/FactoryTwin/FactoryTwin/Intermediate/Build/Win64/x64/UnrealEditor/Development/FactoryTwin/FactoryTwin.cpp.obj"
+"C:/Users/user/Documents/GitHub/FactoryTwin/FactoryTwin/Intermediate/Build/Win64/x64/UnrealEditor/Development/FactoryTwin/StationActor.cpp.obj"
+"C:/Users/user/Documents/GitHub/FactoryTwin/FactoryTwin/Intermediate/Build/Win64/x64/UnrealEditor/Development/FactoryTwin/PerModuleInline.gen.cpp.obj"
+"C:/Users/user/Documents/GitHub/FactoryTwin/FactoryTwin/Intermediate/Build/Win64/x64/UnrealEditor/Development/FactoryTwin/Default.rc2.res"
+/OUT:"C:/Users/user/Documents/GitHub/FactoryTwin/FactoryTwin/Intermediate/Build/Win64/x64/UnrealEditor/Development/FactoryTwin/UnrealEditor-FactoryTwin.lib"
