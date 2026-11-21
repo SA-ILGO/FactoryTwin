@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FactoryTwinModuleRules")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Development")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+84b254971cb2efa72e7cd80838efd5766d5a2e07")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f139679460c478fefd9fb21ff55e6be040b14bd")]
 [assembly: System.Reflection.AssemblyProductAttribute("FactoryTwinModuleRules")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FactoryTwinModuleRules")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

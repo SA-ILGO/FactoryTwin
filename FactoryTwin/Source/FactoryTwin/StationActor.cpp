@@ -1,105 +1,121 @@
-﻿#include "StationActor.h"
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
+
+#include "StationActor.h"
 #include "Components/SceneComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Materials/MaterialInstanceDynamic.h"
+#include "Engine/GameInstance.h"
+#include "FactoryStateSubsystem.h"
 
-
-// 생성자: 설비의 컴포넌트 생성
 AStationActor::AStationActor()
 {
-    PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = false;
 
-    SceneRoot = CreateDefaultSubobject<USceneComponent>(
-        TEXT("SceneRoot")
-    );
+	SceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("SceneRoot"));
+	SetRootComponent(SceneRoot);
 
-    SetRootComponent(SceneRoot);
+	ModelRoot = CreateDefaultSubobject<USceneComponent>(TEXT("ModelRoot"));
+	ModelRoot->SetupAttachment(SceneRoot);
 
-    BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BodyMesh"));
-    BodyMesh->SetupAttachment(SceneRoot);
-    BodyMesh->SetCollisionProfileName(TEXT("BlockAllDynamic"));
+	BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BodyMesh"));
+	BodyMesh->SetupAttachment(ModelRoot);
+	BodyMesh->SetCollisionProfileName(TEXT("BlockAllDynamic"));
 
+	LampMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("LampMesh"));
+	LampMesh->SetupAttachment(ModelRoot);
+	LampMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
-    // 3. 설비 상태 표시등
-    LampMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("LampMesh"));
-    LampMesh->SetupAttachment(SceneRoot);
-    LampMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-
-    BodyMesh->SetMobility(EComponentMobility::Movable);
-    LampMesh->SetMobility(EComponentMobility::Movable);
+	BodyMesh->SetMobility(EComponentMobility::Movable);
+	LampMesh->SetMobility(EComponentMobility::Movable);
 }
 
+void AStationActor::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+	PlaceModelRoot(); // 에디터에서 배치·수정할 때도 모델이 제자리에 보이도록
+}
 
-// 게임 시작 시 호출
+void AStationActor::PlaceModelRoot()
+{
+	if (bUseMapModels)
+	{
+		// 액터 위치·회전과 상관없이 맵 모델 기준에 고정
+		ModelRoot->SetUsingAbsoluteLocation(true);
+		ModelRoot->SetUsingAbsoluteRotation(true);
+		ModelRoot->SetUsingAbsoluteScale(true);
+		ModelRoot->SetWorldLocationAndRotation(FactoryModel::Origin(), FRotator::ZeroRotator);
+		ModelRoot->SetWorldScale3D(FVector(FactoryModel::Scale));
+	}
+	else
+	{
+		// 액터를 그대로 따라감
+		ModelRoot->SetUsingAbsoluteLocation(false);
+		ModelRoot->SetUsingAbsoluteRotation(false);
+		ModelRoot->SetUsingAbsoluteScale(false);
+		ModelRoot->SetRelativeTransform(FTransform::Identity);
+	}
+}
+
 void AStationActor::BeginPlay()
 {
-    Super::BeginPlay();
+	Super::BeginPlay();
 
-    // 램프 머티리얼을 동적으로 변경하기 위한 인스턴스 생성
-    LampMID = LampMesh->CreateDynamicMaterialInstance(0);
+	PlaceModelRoot();
 
-    if (!LampMID)
-    {
-        UE_LOG(LogTemp, Warning, TEXT("%s: Check LampMesh material."), *GetName());
-    }
+	LampMID = LampMesh->CreateDynamicMaterialInstance(0);
+	if (!LampMID)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s: Check LampMesh material."), *GetName());
+	}
 
-    ApplyState();
+	// 아직 데이터 없음: 저장소에 이 공정이 생기기 전까지 OFFLINE으로 보임
+	ViewState = FStationState();
+	ViewState.StationId = StationId;
+
+	if (UGameInstance* GameInstance = GetGameInstance())
+	{
+		if (UFactoryStateSubsystem* Store = GameInstance->GetSubsystem<UFactoryStateSubsystem>())
+		{
+			Store->OnStationChanged.AddDynamic(this, &AStationActor::HandleStationChanged);
+			FStationState Existing;
+			if (Store->GetStationState(StationId, Existing))
+			{
+				ViewState = Existing;
+			}
+		}
+	}
+
+	ApplyVisual();
 }
 
-
-// 설비 상태 변경
-void AStationActor::SetState(EStationState NewState)
+void AStationActor::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-    if (State == NewState)
-    {
-        return;
-    }
-
-    State = NewState;
-
-    ApplyState();
+	if (UGameInstance* GameInstance = GetGameInstance())
+	{
+		if (UFactoryStateSubsystem* Store = GameInstance->GetSubsystem<UFactoryStateSubsystem>())
+		{
+			Store->OnStationChanged.RemoveDynamic(this, &AStationActor::HandleStationChanged);
+		}
+	}
+	Super::EndPlay(EndPlayReason);
 }
 
-void AStationActor::ApplyState()
+void AStationActor::HandleStationChanged(const FStationState& NewState)
 {
-    if (LampMID)
-    {
-        LampMID->SetVectorParameterValue(
-            TEXT("StatusColor"),
-            GetStateColor()
-        );
-    }
+	if (NewState.StationId != StationId)
+	{
+		return; // 다른 공정 소식
+	}
+	ViewState = NewState;
+	ApplyVisual();
 }
 
-FText AStationActor::GetStateLabel() const
+void AStationActor::ApplyVisual()
 {
-    switch (State)
-    {
-    case EStationState::Running:
-        return NSLOCTEXT("DT", "Running", "Running");
-
-    case EStationState::Fault:
-        return NSLOCTEXT("DT", "Fault", "Fault");
-
-    default:
-        return NSLOCTEXT("DT", "Idle", "Idle");
-    }
-}
-
-
-// 상태에 따른 색상 반환
-FLinearColor AStationActor::GetStateColor() const
-{
-    switch (State)
-    {
-    case EStationState::Running:
-        return FLinearColor(0.05f, 0.8f, 0.25f, 1.0f);
-
-    case EStationState::Fault:
-        return FLinearColor(1.0f, 0.08f, 0.04f, 1.0f);
-
-    default:
-        return FLinearColor(0.35f, 0.45f, 0.55f, 1.0f);
-    }
+	if (LampMID)
+	{
+		LampMID->SetVectorParameterValue(
+			TEXT("StatusColor"), UFactoryStateSubsystem::GetDisplayColor(ViewState));
+	}
 }

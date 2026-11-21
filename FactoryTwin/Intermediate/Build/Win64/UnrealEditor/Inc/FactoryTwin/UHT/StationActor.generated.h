@@ -16,19 +16,17 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
-enum class EStationState : uint8;
-struct FLinearColor;
+struct FStationState;
 
 // ********** Begin Class AStationActor ************************************************************
-#define FID_Users_user_Documents_GitHub_FactoryTwin_FactoryTwin_Source_FactoryTwin_StationActor_h_24_RPC_WRAPPERS_NO_PURE_DECLS \
-	DECLARE_FUNCTION(execGetStateColor); \
-	DECLARE_FUNCTION(execGetStateLabel); \
-	DECLARE_FUNCTION(execSetState);
+#define FID_Users_user_Documents_GitHub_FactoryTwin_FactoryTwin_Source_FactoryTwin_StationActor_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execHandleStationChanged); \
+	DECLARE_FUNCTION(execGetViewState);
 
 
 FACTORYTWIN_API UClass* Z_Construct_UClass_AStationActor_NoRegister();
 
-#define FID_Users_user_Documents_GitHub_FactoryTwin_FactoryTwin_Source_FactoryTwin_StationActor_h_24_INCLASS_NO_PURE_DECLS \
+#define FID_Users_user_Documents_GitHub_FactoryTwin_FactoryTwin_Source_FactoryTwin_StationActor_h_19_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAStationActor(); \
 	friend struct Z_Construct_UClass_AStationActor_Statics; \
@@ -39,7 +37,7 @@ public: \
 	DECLARE_SERIALIZER(AStationActor)
 
 
-#define FID_Users_user_Documents_GitHub_FactoryTwin_FactoryTwin_Source_FactoryTwin_StationActor_h_24_ENHANCED_CONSTRUCTORS \
+#define FID_Users_user_Documents_GitHub_FactoryTwin_FactoryTwin_Source_FactoryTwin_StationActor_h_19_ENHANCED_CONSTRUCTORS \
 	/** Deleted move- and copy-constructors, should never be used */ \
 	AStationActor(AStationActor&&) = delete; \
 	AStationActor(const AStationActor&) = delete; \
@@ -49,13 +47,13 @@ public: \
 	NO_API virtual ~AStationActor();
 
 
-#define FID_Users_user_Documents_GitHub_FactoryTwin_FactoryTwin_Source_FactoryTwin_StationActor_h_21_PROLOG
-#define FID_Users_user_Documents_GitHub_FactoryTwin_FactoryTwin_Source_FactoryTwin_StationActor_h_24_GENERATED_BODY \
+#define FID_Users_user_Documents_GitHub_FactoryTwin_FactoryTwin_Source_FactoryTwin_StationActor_h_16_PROLOG
+#define FID_Users_user_Documents_GitHub_FactoryTwin_FactoryTwin_Source_FactoryTwin_StationActor_h_19_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_user_Documents_GitHub_FactoryTwin_FactoryTwin_Source_FactoryTwin_StationActor_h_24_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_user_Documents_GitHub_FactoryTwin_FactoryTwin_Source_FactoryTwin_StationActor_h_24_INCLASS_NO_PURE_DECLS \
-	FID_Users_user_Documents_GitHub_FactoryTwin_FactoryTwin_Source_FactoryTwin_StationActor_h_24_ENHANCED_CONSTRUCTORS \
+	FID_Users_user_Documents_GitHub_FactoryTwin_FactoryTwin_Source_FactoryTwin_StationActor_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_user_Documents_GitHub_FactoryTwin_FactoryTwin_Source_FactoryTwin_StationActor_h_19_INCLASS_NO_PURE_DECLS \
+	FID_Users_user_Documents_GitHub_FactoryTwin_FactoryTwin_Source_FactoryTwin_StationActor_h_19_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -66,16 +64,5 @@ class AStationActor;
 
 #undef CURRENT_FILE_ID
 #define CURRENT_FILE_ID FID_Users_user_Documents_GitHub_FactoryTwin_FactoryTwin_Source_FactoryTwin_StationActor_h
-
-// ********** Begin Enum EStationState *************************************************************
-#define FOREACH_ENUM_ESTATIONSTATE(op) \
-	op(EStationState::Idle) \
-	op(EStationState::Running) \
-	op(EStationState::Fault) 
-
-enum class EStationState : uint8;
-template<> struct TIsUEnumClass<EStationState> { enum { Value = true }; };
-template<> FACTORYTWIN_API UEnum* StaticEnum<EStationState>();
-// ********** End Enum EStationState ***************************************************************
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

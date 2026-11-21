@@ -30,6 +30,24 @@
     <Filter Include="Source\FactoryTwin">
       <UniqueIdentifier>{DFA12461-55BE-3230-B4CB-F2A344AA2C64}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\FactoryTwin\AgvActor.cpp">
+      <Filter>Source\FactoryTwin</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FactoryTwin\AgvActor.h">
+      <Filter>Source\FactoryTwin</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\FactoryTwin\FactoryMap.cpp">
+      <Filter>Source\FactoryTwin</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FactoryTwin\FactoryMap.h">
+      <Filter>Source\FactoryTwin</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\FactoryTwin\FactoryStateSubsystem.cpp">
+      <Filter>Source\FactoryTwin</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FactoryTwin\FactoryStateSubsystem.h">
+      <Filter>Source\FactoryTwin</Filter>
+    </ClInclude>
     <None Include="..\..\Source\FactoryTwin\FactoryTwin.Build.cs">
       <Filter>Source\FactoryTwin</Filter>
     </None>
@@ -37,6 +55,18 @@
       <Filter>Source\FactoryTwin</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\FactoryTwin\FactoryTwin.h">
+      <Filter>Source\FactoryTwin</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\FactoryTwin\FactoryTypes.cpp">
+      <Filter>Source\FactoryTwin</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FactoryTwin\FactoryTypes.h">
+      <Filter>Source\FactoryTwin</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\FactoryTwin\MockFactoryFeed.cpp">
+      <Filter>Source\FactoryTwin</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FactoryTwin\MockFactoryFeed.h">
       <Filter>Source\FactoryTwin</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\FactoryTwin\StationActor.cpp">

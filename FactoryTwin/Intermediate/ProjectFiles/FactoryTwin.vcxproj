@@ -257,11 +257,31 @@
     <None Include="..\..\Config\DefaultEngine.ini"/>
     <None Include="..\..\Config\DefaultGame.ini"/>
     <None Include="..\..\Config\DefaultInput.ini"/>
+    <ClCompile Include="..\..\Source\FactoryTwin\AgvActor.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FactoryTwin\AgvActor.h"/>
+    <ClCompile Include="..\..\Source\FactoryTwin\FactoryMap.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FactoryTwin\FactoryMap.h"/>
+    <ClCompile Include="..\..\Source\FactoryTwin\FactoryStateSubsystem.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FactoryTwin\FactoryStateSubsystem.h"/>
     <None Include="..\..\Source\FactoryTwin\FactoryTwin.Build.cs"/>
     <ClCompile Include="..\..\Source\FactoryTwin\FactoryTwin.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClInclude Include="..\..\Source\FactoryTwin\FactoryTwin.h"/>
+    <ClCompile Include="..\..\Source\FactoryTwin\FactoryTypes.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FactoryTwin\FactoryTypes.h"/>
+    <ClCompile Include="..\..\Source\FactoryTwin\MockFactoryFeed.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FactoryTwin\MockFactoryFeed.h"/>
     <ClCompile Include="..\..\Source\FactoryTwin\StationActor.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
