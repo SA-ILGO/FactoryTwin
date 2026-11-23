@@ -15,6 +15,7 @@ class UCameraComponent;
 class UStaticMesh;
 class UAnimationAsset;
 class AFactoryMap;
+class USelectionRingComponent;
 
 UENUM(BlueprintType)
 enum class EAgvCameraMode : uint8
@@ -86,6 +87,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AGV")
 	TObjectPtr<UCameraComponent> PovCam;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AGV")
+	TObjectPtr<USelectionRingComponent> SelectionRing;
 
 private:
 	UPROPERTY(Transient)

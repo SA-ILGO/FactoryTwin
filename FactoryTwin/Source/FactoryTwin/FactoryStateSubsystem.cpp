@@ -268,3 +268,24 @@ FText UFactoryStateSubsystem::GetPositionSourceLabel(EPositionSource Source)
 		? NSLOCTEXT("Factory", "PosEstimated", "ESTIMATED")
 		: NSLOCTEXT("Factory", "PosConfirmed", "STATION_CONFIRMED");
 }
+
+TArray<FAgvState> UFactoryStateSubsystem::GetAllAgvs() const
+{
+	TArray<FAgvState> Result;
+	Agvs.GenerateValueArray(Result);
+	return Result;
+}
+
+double UFactoryStateSubsystem::GetLatestReceivedSeconds() const
+{
+	double Latest = 0.0;
+	for (const TPair<FName, FStationState>& Pair : Stations)
+	{
+		Latest = FMath::Max(Latest, Pair.Value.LastReceivedSeconds);
+	}
+	for (const TPair<FName, FAgvState>& Pair : Agvs)
+	{
+		Latest = FMath::Max(Latest, Pair.Value.LastReceivedSeconds);
+	}
+	return Latest;
+}

@@ -7,6 +7,9 @@
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Engine/GameInstance.h"
 #include "FactoryStateSubsystem.h"
+#include "Kismet/GameplayStatics.h" 
+#include "FactoryMap.h"
+#include "SelectionRingComponent.h"
 
 AStationActor::AStationActor()
 {
@@ -28,6 +31,10 @@ AStationActor::AStationActor()
 
 	BodyMesh->SetMobility(EComponentMobility::Movable);
 	LampMesh->SetMobility(EComponentMobility::Movable);
+
+	SelectionRing = CreateDefaultSubobject<USelectionRingComponent>(TEXT("SelectionRing"));
+	SelectionRing->SetupAttachment(SceneRoot);
+	SelectionRing->RingRadius = 17.0f * FactoryModel::MapToWorld;
 }
 
 void AStationActor::OnConstruction(const FTransform& Transform)
@@ -87,6 +94,17 @@ void AStationActor::BeginPlay()
 	}
 
 	ApplyVisual();
+
+	// 선택 고리를 이 공정의 정지 지점 바닥에 두고, 선택 상태에 연결
+	if (const AFactoryMap* Map = Cast<AFactoryMap>(UGameplayStatics::GetActorOfClass(this,
+		AFactoryMap::StaticClass())))
+	{
+		if (Map->HasStop(StationId))
+		{
+			SelectionRing->SetWorldLocation(Map->GetStopLocation(StationId) + FVector(0.0f, 0.0f, 0.5f));
+		}
+	}
+	SelectionRing->Bind(ESelectionKind::Station, StationId);
 }
 
 void AStationActor::EndPlay(const EEndPlayReason::Type EndPlayReason)

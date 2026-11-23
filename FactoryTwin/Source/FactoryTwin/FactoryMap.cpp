@@ -164,3 +164,31 @@ FRotator AFactoryMap::GetRotationAtDistance(float Distance) const
 {
 	return LoopSpline->GetRotationAtDistanceAlongSpline(Distance, ESplineCoordinateSpace::World);
 }
+
+FVector AFactoryMap::GetStopLocation(FName StationId) const
+{
+	if (const int32* Index = StopPointIndex.Find(StationId))
+	{
+		return LoopSpline->GetLocationAtSplinePoint(*Index, ESplineCoordinateSpace::World);
+	}
+	return FVector::ZeroVector;
+}
+
+FName AFactoryMap::FindNearestStop(FVector WorldLocation, float MaxDistance) const
+{
+	FName Best = NAME_None;
+	float BestDistance = MaxDistance;
+	for (const TPair<FName, int32>& Pair : StopPointIndex)
+	{
+		const FVector StopLocation = LoopSpline->GetLocationAtSplinePoint(Pair.Value, ESplineCoordinateSpace::World);
+		
+		// 높이는 무시하고 바닥 평면에서만 잼
+		const float Distance = FVector::Dist2D(StopLocation, WorldLocation);
+		if (Distance <= BestDistance)
+		{
+			BestDistance = Distance;
+			Best = Pair.Key;
+		}
+	}
+	return Best;
+}

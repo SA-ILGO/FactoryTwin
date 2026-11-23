@@ -50,6 +50,13 @@ class FACTORYTWIN_API UFactoryStateSubsystem : public UGameInstanceSubsystem
 		UPROPERTY(BlueprintAssignable, Category = "Factory|AGV")
 		FOnAgvChanged OnAgvChanged;
 
+		UFUNCTION(BlueprintPure, Category = "Factory|View")
+		TArray<FAgvState> GetAllAgvs() const;
+		
+		// 공정·AGV 통틀어 가장 최근에 받은 시각 (FPlatformTime 기준). 받은 적 없으면 0
+		UFUNCTION(BlueprintPure, Category = "Factory|View")
+		double GetLatestReceivedSeconds() const;
+
 		// ---- Display helpers ----
 		UFUNCTION(BlueprintPure, Category = "Factory|Display")
 		static FText GetOperationLabel(EOperationState Operation);

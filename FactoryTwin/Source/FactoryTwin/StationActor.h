@@ -10,6 +10,7 @@
 class USceneComponent;
 class UStaticMeshComponent;
 class UMaterialInstanceDynamic;
+class USelectionRingComponent;
 
 // 공정 장비 하나. 저장소의 상태를 읽어 상태 LED 색으로 보여 준다.
 // 실습 03: 블렌더 공정 모델(기둥·LED·팔 등)을 ModelRoot 아래에 붙인다.
@@ -55,6 +56,9 @@ protected:
 	// 상태 LED (머티리얼 0번 = M_StatusLamp)
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Station")
 	TObjectPtr<UStaticMeshComponent> LampMesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Station")
+	TObjectPtr<USelectionRingComponent> SelectionRing;
 
 private:
 	UPROPERTY(Transient)

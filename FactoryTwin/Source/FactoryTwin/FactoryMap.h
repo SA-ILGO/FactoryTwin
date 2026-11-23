@@ -48,6 +48,14 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Map")
 	FRotator GetRotationAtDistance(float Distance) const;
 
+	// 정지 지점의 월드 좌표 (없으면 ZeroVector)
+	UFUNCTION(BlueprintPure, Category = "Map")
+	FVector GetStopLocation(FName StationId) const;
+
+	// 월드 좌표에서 가장 가까운 정지 지점. MaxDistance 밖이면 None
+	UFUNCTION(BlueprintPure, Category = "Map")
+	FName FindNearestStop(FVector WorldLocation, float MaxDistance) const;
+
 protected:
 	virtual void BeginPlay() override;
 

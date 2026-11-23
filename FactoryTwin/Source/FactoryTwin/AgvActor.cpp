@@ -12,6 +12,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "FactoryMap.h"
 #include "FactoryStateSubsystem.h"
+#include "SelectionRingComponent.h"
 
 // Sets default values
 AAgvActor::AAgvActor()
@@ -66,6 +67,11 @@ AAgvActor::AAgvActor()
 	PovCam->SetRelativeLocation(FVector(11.0f, 0.0f, 18.5f));
 	PovCam->SetFieldOfView(80.0f);
 	PovCam->SetAutoActivate(false);
+
+	SelectionRing = CreateDefaultSubobject<USelectionRingComponent>(TEXT("SelectionRing"));
+	SelectionRing->SetupAttachment(SceneRoot);
+	SelectionRing->SetRelativeLocation(FVector(0.0f, 0.0f, 0.5f));
+	SelectionRing->RingRadius = 18.0f * FactoryModel::MapToWorld;
 }
 
 // Called when the game starts or when spawned
@@ -98,6 +104,8 @@ void AAgvActor::BeginPlay()
 	}
 
 	ApplyState(true); 
+
+	SelectionRing->Bind(ESelectionKind::Agv, AgvId);
 }
 
 void AAgvActor::EndPlay(const EEndPlayReason::Type EndPlayReason)

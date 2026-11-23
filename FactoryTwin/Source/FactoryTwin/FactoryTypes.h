@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/DataTable.h"
 #include "FactoryTypes.generated.h"
 
 UENUM(BlueprintType)
@@ -122,6 +123,42 @@ namespace FactoryModel
 	constexpr float AgvYaw = 90.0f;
 }
 
+// 정지 지점 정의 한 줄 (DataTable DA_StationDefs의 행 구조)
+// 행 이름 = StationId (LOAD, P1, P2, P3, P4, INSP). 서버 데이터가 아니라 맵에 딸린 값
+USTRUCT(BlueprintType)
+struct FStationDefRow : public FTableRowBase
+{
+	GENERATED_BODY()
+
+	//  한 바퀴 순서 (출발 0 ~ 검사 5)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Factory")
+	int32 Order = 0;
+
+	// 화면에 쓰는 이름 (예: P2 차체)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Factory")
+	FText DisplayName;
+
+	// 실물 구역색 (목록의 작은 칩에만 씀)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Factory")
+	FLinearColor ZoneColor = FLinearColor::White;
+};
+
+// 상세 패널 한 줄 (항목 이름 + 값)
+USTRUCT(BlueprintType)
+struct FTwinDetailRow
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Twin")
+	FText Label;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Twin")
+	FText Value;
+
+	// 값 글자색. 상태 값은 상태색, 나머지는 기본 검정
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Twin")
+	FLinearColor ValueColor = FLinearColor(0.06f, 0.09f, 0.16f, 1.0f);
+};
 
 /**
  * 
